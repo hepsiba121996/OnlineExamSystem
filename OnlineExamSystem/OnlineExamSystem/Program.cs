@@ -4,9 +4,14 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using OnlineExamSystem.Data;
 using OnlineExamSystem.Helpers;
+using OnlineExamSystem.Repositories.Implementations;
+using OnlineExamSystem.Repositories.Interfaces;
+using OnlineExamSystem.Services;
 using OnlineExamSystem.Services.Implementations;
 using OnlineExamSystem.Services.Interfaces;
 using System.Text;
+using OfficeOpenXml;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -61,10 +66,14 @@ builder.Services.AddAuthorization();
 builder.Services.AddScoped<JwtHelper>();
 
 builder.Services.AddScoped<IAuthService, AuthService>();
-
-
-
+builder.Services.AddScoped<IExamService, ExamService>();
+builder.Services.AddScoped<IQuestionService, QuestionService>();
+builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+builder.Services.AddScoped<IExamRepository, ExamRepository>();
+builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
+builder.Services.AddScoped<IExcelImportService,ExcelImportService>();
 builder.Services.AddEndpointsApiExplorer();
+ExcelPackage.License.SetNonCommercialPersonal("Hepsiba");
 
 var app = builder.Build();
 

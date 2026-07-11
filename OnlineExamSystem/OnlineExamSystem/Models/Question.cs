@@ -13,6 +13,6 @@ namespace OnlineExamSystem.Models
         public string OptionD { get; set;}
         public string CorrectAnswer {  get; set;}
         public int ExamId {  get; set; }
-        public Exam Exam { get; set; }
+        public Exam? Exam { get; set; }
     }
 }
