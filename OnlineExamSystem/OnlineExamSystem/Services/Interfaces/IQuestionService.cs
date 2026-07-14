@@ -7,5 +7,13 @@ namespace OnlineExamSystem.Services.Interfaces
     {
         Task<string> AddQuestion(CreateQuestionDto question);
         Task<Question> GetQuestions(int id);
+        Task<List<QuestionResponseDto>> GetQuestionsByExamId(int examId);
+
+
+
+
+
+
+
     }
 }

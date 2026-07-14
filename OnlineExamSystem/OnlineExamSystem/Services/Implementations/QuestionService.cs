@@ -34,5 +34,19 @@ namespace OnlineExamSystem.Services.Implementations
            return await _questionRepository.GetQuestionById(id);
             
         }
+        public async Task<List<QuestionResponseDto>> GetQuestionsByExamId(int examId)
+        {
+            var questions = await _questionRepository.GetQuestionsByExamId(examId);
+            return questions.Select(x => new QuestionResponseDto
+            {
+                QuestionId=x.QuestionId,
+                QuestionText=x.QuestionText,
+                OptionA=x.OptionA,
+                OptionB=x.OptionB,
+                OptionC=x.OptionC,
+                OptionD=x.OptionD
+            }).ToList();
+        }
+
     }
 }

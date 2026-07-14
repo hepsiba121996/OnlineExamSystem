@@ -46,12 +46,7 @@ namespace OnlineExamSystem.Controllers
             var queId=await _questionRepository.GetQuestionById(id);
             return Ok(queId);
         }
-        //[HttpPost("AddQuestions")]
-        //public async Task<IActionResult> AddQue(Question question)
-        //{
-        //    var addque = await _questionRepository.add(question);
-        //    return Ok(addque);
-        //}
+        
         [HttpPut("EditQuestion")]
         public async Task<IActionResult>ModifyQue(int id,Question question)
         {
@@ -63,6 +58,13 @@ namespace OnlineExamSystem.Controllers
         {
             var deleteque=await _questionRepository.delete(id);
             return Ok(deleteque);
+        }
+        [HttpGet("exam/{examId}")]
+        public async Task<IActionResult> GetQuestionsByExamId(int examId)
+        {
+            var result = await _questionService.GetQuestionsByExamId(examId);
+
+            return Ok(result);
         }
     }
 }

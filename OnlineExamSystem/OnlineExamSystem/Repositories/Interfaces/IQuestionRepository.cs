@@ -8,5 +8,7 @@ namespace OnlineExamSystem.Repositories.Interfaces
         Task<Question> add(Question question);
         Task<Question> update(int id,Question question);
         Task<Question> delete(int id);
+        Task<List<Question>> GetQuestionsByExamId(int examId);
+
     }
 }

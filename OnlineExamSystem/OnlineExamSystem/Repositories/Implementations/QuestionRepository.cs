@@ -49,6 +49,11 @@ namespace OnlineExamSystem.Repositories.Implementations
             await _dbContext.SaveChangesAsync();
             return result;
         }
+        public async Task<List<Question>> GetQuestionsByExamId(int examId)
+        {
+             return await _dbContext.question.Where(x=>x.ExamId==examId).ToListAsync();
+        }
+
 
     }
 }
