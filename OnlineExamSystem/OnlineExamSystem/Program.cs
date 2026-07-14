@@ -72,6 +72,9 @@ builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 builder.Services.AddScoped<IExamRepository, ExamRepository>();
 builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
 builder.Services.AddScoped<IExcelImportService,ExcelImportService>();
+builder.Services.AddScoped<IStudentExamRepository, StudentExamRepository>();
+
+builder.Services.AddScoped<IStudentExamService, StudentExamService>();
 builder.Services.AddEndpointsApiExplorer();
 ExcelPackage.License.SetNonCommercialPersonal("Hepsiba");
 

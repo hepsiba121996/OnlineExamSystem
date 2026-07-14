@@ -16,6 +16,15 @@ namespace OnlineExamSystem.Data
         public DbSet<Result> results {  get; set; }
         public DbSet<StudentAnswer> studentAnswer { get; set; }
         public DbSet<Subject> subject { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+
+            modelBuilder.Entity<StudentExam>()
+                .HasIndex(x => new { x.StudentId, x.ExamId })
+                .IsUnique();
+        }
     }
     
 }

@@ -23,7 +23,7 @@ namespace OnlineExamSystem.Models
 
 
 
-        public DateTime StartedTime { get; set; }
+        public DateTime? StartedTime { get; set; }
 
 
         public DateTime? SubmittedTime { get; set; }
