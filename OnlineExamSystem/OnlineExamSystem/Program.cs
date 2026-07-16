@@ -73,6 +73,7 @@ builder.Services.AddScoped<IExamRepository, ExamRepository>();
 builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
 builder.Services.AddScoped<IExcelImportService,ExcelImportService>();
 builder.Services.AddScoped<IStudentExamRepository, StudentExamRepository>();
+builder.Services.AddScoped<IStudentAnswerService,StudentAnswerService>();
 
 builder.Services.AddScoped<IStudentExamService, StudentExamService>();
 builder.Services.AddEndpointsApiExplorer();
