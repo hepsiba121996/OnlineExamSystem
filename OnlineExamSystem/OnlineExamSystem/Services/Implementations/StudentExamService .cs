@@ -96,7 +96,37 @@ namespace OnlineExamSystem.Services.Implementations
             }
             studentExam.SubmittedTime = DateTime.Now;
             studentExam.Status = "completed";
-            await _studentExamRepository.Update(studentExam);
+            var answers = await _dbContext.studentAnswer
+                         .Where(x => x.StudentExamId == studentExamId)
+                         .ToListAsync();
+            var questions = await _dbContext.question
+                         .Where(x => answers.Select(a => a.QuestionId)
+                         .Contains(x.QuestionId)).ToListAsync();
+            int correctCount = 0;
+            foreach (var answer in answers)
+            {
+                var question = questions.FirstOrDefault(x => x.QuestionId == answer.QuestionId);
+
+                if (question != null &&
+            answer.SelectedOption.Trim().Equals(question.CorrectAnswer.Trim(), StringComparison.OrdinalIgnoreCase))
+                {
+                    correctCount++;
+                }
+
+            }
+            var result = new Result
+            {
+                StudentExamId = studentExamId,
+                TotalQuestions = questions.Count,
+                CorrectAnswers = correctCount,
+                Score = correctCount,
+                Percentage = questions.Count > 0
+               ? (double)correctCount / questions.Count * 100
+               : 0
+            };
+            await _dbContext.results.AddAsync(result);
+            await _studentExamRepository.SaveAsync();
+
             return "Exam Submitted Successfully";
 
 
